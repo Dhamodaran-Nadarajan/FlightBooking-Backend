@@ -1,0 +1,139 @@
+{
+  "ReRoutes": [
+    // Airline Management - API
+    {
+      "DownstreamPathTemplate": "/api/airlines",
+      "DownstreamScheme": "http",
+      "DownstreamHost": "localhost",
+      "DownstreamPort": 8001,
+      "UpstreamPathTemplate": "/flightBooking/airlines",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/airlines/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHost": "localhost",
+      "DownstreamPort": 8001,
+      "UpstreamPathTemplate": "/flightBooking/airlines/{id}",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/airlines",
+      "DownstreamScheme": "http",
+      "DownstreamHost": "localhost",
+      "DownstreamPort": 8001,
+      "UpstreamPathTemplate": "/flightBooking/airlines",
+      "UpstreamHttpMethod": [ "Post" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/airlines/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHost": "localhost",
+      "DownstreamPort": 8001,
+      "UpstreamPathTemplate": "/flightBooking/airlines/{id}",
+      "UpstreamHttpMethod": [ "Delete" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/airlines/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHost": "localhost",
+      "DownstreamPort": 8001,
+      "UpstreamPathTemplate": "/flightBooking/airlines/{id}",
+      "UpstreamHttpMethod": [ "Put" ]
+    },
+
+
+
+
+    // Inventory Management - API
+    {
+      "DownstreamPathTemplate": "/api/search",
+      "DownstreamScheme": "http",
+      "DownstreamHost": "localhost",
+      "DownstreamPort": 8002,
+      "UpstreamPathTemplate": "/flightBooking/search",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/search/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHost": "localhost",
+      "DownstreamPort": 8002,
+      "UpstreamPathTemplate": "/flightBooking/search/{id}",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/search",
+      "DownstreamScheme": "http",
+      "DownstreamHost": "localhost",
+      "DownstreamPort": 8002,
+      "UpstreamPathTemplate": "/flightBooking/search",
+      "UpstreamHttpMethod": [ "Post" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/search/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHost": "localhost",
+      "DownstreamPort": 8002,
+      "UpstreamPathTemplate": "/flightBooking/search/{id}",
+      "UpstreamHttpMethod": [ "Delete" ]
+    },
+
+
+
+
+    // Booking Management - API
+    {
+      "DownstreamPathTemplate": "/api/bookings",
+      "DownstreamScheme": "http",
+      "DownstreamHost": "localhost",
+      "DownstreamPort": 8003,
+      "UpstreamPathTemplate": "/flightBooking/bookings",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/bookings/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHost": "localhost",
+      "DownstreamPort": 8003,
+      "UpstreamPathTemplate": "/flightBooking/bookings/{id}",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/bookings",
+      "DownstreamScheme": "http",
+      "DownstreamHost": "localhost",
+      "DownstreamPort": 8003,
+      "UpstreamPathTemplate": "/flightBooking/bookings",
+      "UpstreamHttpMethod": [ "Post" ]
+    },
+
+
+
+    // User Management - API
+    {
+      "DownstreamPathTemplate": "/api/login",
+      "DownstreamScheme": "http",
+      "DownstreamHost": "localhost",
+      "DownstreamPort": 8004,
+      "UpstreamPathTemplate": "/flightBooking/login",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/login/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHost": "localhost",
+      "DownstreamPort": 8004,
+      "UpstreamPathTemplate": "/flightBooking/login/{id}",
+      "UpstreamHttpMethod": [ "Delete" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/login",
+      "DownstreamScheme": "http",
+      "DownstreamHost": "localhost",
+      "DownstreamPort": 8004,
+      "UpstreamPathTemplate": "/flightBooking/login",
+      "UpstreamHttpMethod": [ "Post" ]
+    }
+  ]
+}
