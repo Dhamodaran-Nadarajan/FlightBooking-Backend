@@ -11,18 +11,18 @@ namespace UserManagement.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class LoginController : ControllerBase
+    public class AccountsController : ControllerBase
     {
         private readonly IUserRepository _userRepository;
 
-        public LoginController(IUserRepository repos)
+        public AccountsController(IUserRepository repos)
         {
             this._userRepository = repos;
         }
 
         #region Public Methods
 
-        [HttpGet]
+        [HttpGet("login")]
         public ActionResult Get([FromQuery] string userName, [FromQuery] string pwd)
         {
             try
@@ -43,7 +43,7 @@ namespace UserManagement.Controllers
             }            
         }
 
-        [HttpPost]
+        [HttpPost("register")]
         public ActionResult Post([FromBody] User obj)
         {
             try
@@ -56,7 +56,8 @@ namespace UserManagement.Controllers
                 else
                 {
                     _userRepository.AddNewUser(obj);
-                    return StatusCode(StatusCodes.Status201Created);
+                    //return StatusCode(StatusCodes.Status201Created);
+                    return Ok(obj);
                 }
             }
             catch (Exception ex)

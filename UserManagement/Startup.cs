@@ -30,6 +30,7 @@ namespace UserManagement
             });
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -39,7 +40,6 @@ namespace UserManagement
             {
                 app.UseDeveloperExceptionPage();
             }
-
             app.UseMvc();
         }
     }

@@ -12,6 +12,6 @@ namespace AirlineManagement.Repository
         Airline AddAirline(Airline airline);
         Airline GetAirlineById(int id);
         Airline DeleteAirline(int id);
-        Airline UpdateAirlineStatus(int id, bool isActive);
+        Airline UpdateAirlineStatus(int id);
     }
 }

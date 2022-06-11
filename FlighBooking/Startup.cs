@@ -44,6 +44,7 @@ namespace FlighBooking
 
             };
             services.AddOcelot((IConfigurationRoot)Configuration, setting);
+            services.AddCors();
         }
 
 
@@ -55,7 +56,8 @@ namespace FlighBooking
             {
                 app.UseDeveloperExceptionPage();
             }
-            await app.UseOcelot();
+            app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
+            await app.UseOcelot();            
             app.Run(async (context) =>
             {
                 await context.Response.WriteAsync("Hello World!");

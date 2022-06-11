@@ -112,27 +112,27 @@
 
     // User Management - API
     {
-      "DownstreamPathTemplate": "/api/login",
+      "DownstreamPathTemplate": "/api/accounts/login",
       "DownstreamScheme": "http",
       "DownstreamHost": "localhost",
       "DownstreamPort": 8004,
-      "UpstreamPathTemplate": "/flightBooking/login",
+      "UpstreamPathTemplate": "/flightBooking/accounts/login",
       "UpstreamHttpMethod": [ "Get" ]
     },
     {
-      "DownstreamPathTemplate": "/api/login/{id}",
+      "DownstreamPathTemplate": "/api/accounts/{id}",
       "DownstreamScheme": "http",
       "DownstreamHost": "localhost",
       "DownstreamPort": 8004,
-      "UpstreamPathTemplate": "/flightBooking/login/{id}",
+      "UpstreamPathTemplate": "/flightBooking/accounts/{id}",
       "UpstreamHttpMethod": [ "Delete" ]
     },
     {
-      "DownstreamPathTemplate": "/api/login",
+      "DownstreamPathTemplate": "/api/accounts/register",
       "DownstreamScheme": "http",
       "DownstreamHost": "localhost",
       "DownstreamPort": 8004,
-      "UpstreamPathTemplate": "/flightBooking/login",
+      "UpstreamPathTemplate": "/flightBooking/accounts/register",
       "UpstreamHttpMethod": [ "Post" ]
     }
   ]

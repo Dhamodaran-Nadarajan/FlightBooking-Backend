@@ -70,8 +70,8 @@ namespace AirlineManagement.Controllers
         {
             try
             {
-                _airlineRepository.AddAirline(obj);
-                return StatusCode(StatusCodes.Status201Created);
+                Airline airline = _airlineRepository.AddAirline(obj);
+                return Created("",airline);
             }
             catch(Exception ex)
             {
@@ -81,14 +81,14 @@ namespace AirlineManagement.Controllers
         }
 
         [HttpPut("{id}")]
-        public ActionResult Put(int id, [FromBody] bool value)
+        public ActionResult Put(int id)
         {
             try
             {
-                Airline airline = _airlineRepository.UpdateAirlineStatus(id, value);
+                Airline airline = _airlineRepository.UpdateAirlineStatus(id);
                 if (airline != null)
                 {
-                    return StatusCode(StatusCodes.Status200OK);
+                    return Ok(airline);
                 }
                 else
                 {
@@ -112,7 +112,7 @@ namespace AirlineManagement.Controllers
                 Airline airline = _airlineRepository.DeleteAirline(id);
                 if (airline != null)
                 {
-                    return StatusCode(StatusCodes.Status200OK);
+                    return Ok(airline);
                 }
                 else
                 {

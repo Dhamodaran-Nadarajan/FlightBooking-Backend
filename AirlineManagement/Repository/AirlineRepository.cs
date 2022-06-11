@@ -39,12 +39,12 @@ namespace AirlineManagement.Repository
         }
 
 
-        public Airline UpdateAirlineStatus(int id, bool isActive)
+        public Airline UpdateAirlineStatus(int id)
         {
             Airline airline = GetAirline(id);
             if (airline != null)
             {
-                airline.IsActive = isActive;
+                airline.IsActive = !airline.IsActive;
                 _context.Airlines.Update(airline);
                 _context.SaveChanges();
             }
