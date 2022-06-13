@@ -11,6 +11,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using UserManagement.Repository;
+using UserManagement.Services;
+using UserManagement.Services.Interfaces;
 
 namespace UserManagement
 {
@@ -26,9 +28,10 @@ namespace UserManagement
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContextPool<UserDBContext>(options => {
-                options.UseSqlServer(_config.GetConnectionString("AirlinesManagementDB"));
+                options.UseSqlServer(_config.GetConnectionString("UserManagementDB"));
             });
-            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<ITokenService, TokenService>();
+            services.AddScoped<IUserRepository, UserRepository>();            
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             
         }

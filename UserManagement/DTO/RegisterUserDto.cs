@@ -4,23 +4,23 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace UserManagement.Model
+namespace UserManagement.DTO
 {
-    public class User
+    public class RegisterUserDto
     {
-        [Key]
-        public int UserId { get; set; }
+        [Required]
+        [StringLength(50)]
+        public string Username { get; set; }
 
-        public string UserName { get; set; }
-        
-        public byte[] PasswordHash { get; set; }
+        [Required]
+        public string Password { get; set; }
 
-        public byte[] PasswordSalt { get; set; }
-        
+        [StringLength(100)]
         public string Email { get; set; }
 
         public char Gender { get; set; }
 
+        [Range(1, 999999999)]
         public int ContactNumber { get; set; }
     }
 }

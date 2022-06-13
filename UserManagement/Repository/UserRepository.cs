@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,22 +9,29 @@ namespace UserManagement.Repository
 {
     public class UserRepository : IUserRepository
     {
+        #region Private Fields & Constructor
+
         private readonly UserDBContext _context;
         public UserRepository(UserDBContext context)
         {
             this._context = context;
         }
 
-        public User AddNewUser(User user)
+        #endregion
+
+
+        #region Public Methods
+
+        public async Task<User> GetUser(string username)
         {
-            _context.Users.Add(user);
-            _context.SaveChanges();
-            return user;
+            return await _context.Users.SingleOrDefaultAsync(x => x.UserName.Equals(username));
         }
 
-        public bool AuthenticateUser(string username, string pwd)
+        public async Task<User> AddNewUser(User user)
         {
-            return _context.Users.Any(users => users.UserName.ToLower().Equals(username.ToLower()) && users.Password.Equals(pwd));
+            _context.Users.Add(user);
+            await _context.SaveChangesAsync();
+            return user;
         }
 
         public bool DeleteUser(int userId)
@@ -39,9 +47,11 @@ namespace UserManagement.Repository
             return result;
         }
 
-        public bool IsUserNameExists(string username)
+        public async Task<bool> IsUserNameExists(string username)
         {
-            return _context.Users.Any( users => users.UserName.ToLower().Equals(username.ToLower()));
+            return await _context.Users.AnyAsync( users => users.UserName.ToLower().Equals(username.ToLower()));
         }
+
+        #endregion
     }
 }

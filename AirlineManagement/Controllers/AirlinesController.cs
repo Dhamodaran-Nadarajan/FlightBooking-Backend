@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using AirlineManagement.Models;
 using AirlineManagement.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,6 +22,7 @@ namespace AirlineManagement.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles ="Admin")]
         public ActionResult<IEnumerable<Airline>> GetAirlines()
         {
             try
@@ -32,8 +34,7 @@ namespace AirlineManagement.Controllers
                 }
                 else
                 {
-                    string msg = $"No Airlines available in the database.";
-                    return NotFound(GenerateResponseData(false, null, msg));
+                    return NotFound("No Airlines available in the database.");
                 }
             }
             catch (Exception ex)
@@ -42,8 +43,9 @@ namespace AirlineManagement.Controllers
             }
 
         }
-        
+
         [HttpGet("{id}")]
+        [Authorize(Roles = "Admin")]
         public ActionResult<Airline> GetAirlineById(int id)
         {
             try
@@ -51,7 +53,7 @@ namespace AirlineManagement.Controllers
                 Airline airline = _airlineRepository.GetAirlineById(id);
                 if (airline != null)
                 {
-                    return Ok(GenerateResponseData(true, airline, "Airline Found"));
+                    return Ok(airline);
                 }
                 else
                 {
@@ -66,6 +68,7 @@ namespace AirlineManagement.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public ActionResult AddAirline([FromBody] Airline obj)
         {
             try
@@ -81,6 +84,7 @@ namespace AirlineManagement.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "Admin")]
         public ActionResult Put(int id)
         {
             try
@@ -92,9 +96,7 @@ namespace AirlineManagement.Controllers
                 }
                 else
                 {
-                    string msg = $"Airline not found. Unable to Update Airline ID: {id}";
-                    //return StatusCode(StatusCodes.Status404NotFound, GenerateResponseData(false, null, msg));
-                    return NotFound(GenerateResponseData(false, null, msg));
+                    return NotFound($"Airline not found. Unable to Update Airline ID: {id}");
                 }
             }
             catch (Exception ex)
@@ -105,6 +107,7 @@ namespace AirlineManagement.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
         public ActionResult DeleteAirline(int id)
         {
             try
@@ -116,8 +119,7 @@ namespace AirlineManagement.Controllers
                 }
                 else
                 {
-                    string msg = $"Airline not found. Unable to delete Airline ID: {id}";
-                    return NotFound(GenerateResponseData(false, null, msg));
+                    return NotFound($"Airline not found. Unable to delete Airline ID: {id}");
                 }
             }
             catch(Exception ex)

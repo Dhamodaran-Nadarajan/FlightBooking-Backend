@@ -8,9 +8,9 @@ namespace UserManagement.Repository
 {
     public interface IUserRepository
     {
-        bool IsUserNameExists(string user);
-        bool AuthenticateUser(string username, string pwd);
-        User AddNewUser(User user);
+        Task<bool> IsUserNameExists(string user);
+        Task<User> AddNewUser(User user);
+        Task<User> GetUser(string username);
         bool DeleteUser(int userId);
     }
 }
