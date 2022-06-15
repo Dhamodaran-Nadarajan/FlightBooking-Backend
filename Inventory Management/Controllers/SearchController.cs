@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using InventoryManagement.DTO;
 using InventoryManagement.Models;
 using InventoryManagement.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -22,18 +24,18 @@ namespace Inventory_Management.Controllers
 
         #region Endpoints
         [HttpGet]
-        public ActionResult<IEnumerable<Inventory>> Get([FromQuery]string from, [FromQuery] string to)
+        public ActionResult<IEnumerable<Inventory>> Get([FromQuery] string from, [FromQuery] string to)
         {
             try
             {
                 IEnumerable<Inventory> inventories = _inventoryRepository.GetAirlines(from, to).ToList();
                 if(inventories != null && inventories.Count() > 0)
                 {                    
-                    return Ok(GeneratreResponseData(true, inventories, ""));
+                    return Ok(inventories);
                 }
                 else
                 {
-                    return StatusCode(StatusCodes.Status404NotFound, GeneratreResponseData(false, null, $"No Airlines available for this route !!"));
+                    return NotFound($"No airlines available for this route !!");
                 }
             }
             catch(Exception ex)
@@ -42,19 +44,19 @@ namespace Inventory_Management.Controllers
             }
         }
 
-        [HttpGet("{airlineId}")]
-        public ActionResult<IEnumerable<Inventory>> Get(int airlineId)
+        [HttpGet("{schedId}")]
+        public ActionResult<IEnumerable<Inventory>> Get(int schedId)
         {
             try
             {
-                IEnumerable<Inventory> inventories = _inventoryRepository.GetAirlines(airlineId).ToList();
-                if(inventories != null && inventories.Count() > 0)
+                Inventory inventories = _inventoryRepository.GetAirlines(schedId);
+                if(inventories != null)
                 {
-                    return Ok(GeneratreResponseData(true, inventories, ""));
+                    return Ok(inventories);
                 }
                 else
                 {
-                    return StatusCode(StatusCodes.Status404NotFound, GeneratreResponseData(false, null, $"Airline: {airlineId} not found !!"));
+                    return StatusCode(StatusCodes.Status404NotFound, GeneratreResponseData(false, null, $"Schedule: {schedId} not found !!"));
                 }
             }
             catch (Exception ex)
@@ -65,6 +67,7 @@ namespace Inventory_Management.Controllers
 
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public ActionResult<Inventory> Post([FromBody] Inventory obj)
         {
             try
@@ -72,7 +75,7 @@ namespace Inventory_Management.Controllers
                 Inventory inventory = _inventoryRepository.ScheduleAirline(obj);
                 if(inventory !=  null)
                 {
-                    return Ok(GeneratreResponseData(true, inventory, ""));
+                    return Ok(inventory);
                 }
                 else
                 {

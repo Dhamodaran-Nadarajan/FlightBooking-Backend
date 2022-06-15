@@ -21,18 +21,9 @@ namespace InventoryManagement.Repository
 
         #region  Public Methods
 
-        public IEnumerable<Inventory> GetAirlines(int airlineId)
+        public Inventory GetAirlines(int airlineId)
         {
-            //AirlineRepository repos = new AirlineRepository(_airlineDbContext);
-            //Airline airline = repos.GetAirlineById(airlineId);
-            //IEnumerable<Inventory> inventories =  _context.Inventories.Where(x => x.AirlineId == airlineId);
-            //foreach(Inventory inv in inventories)
-            //{
-            //    inv.
-            //}
-
-            return _context.Inventories.Where(x => x.AirlineId == airlineId);
-
+            return _context.Inventories.SingleOrDefault(x => x.Id == airlineId);
         }
 
 

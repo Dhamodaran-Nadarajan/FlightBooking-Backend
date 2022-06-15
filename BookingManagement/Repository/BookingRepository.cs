@@ -31,5 +31,22 @@ namespace BookingManagement.Repository
         {
             return _context.Bookings.FirstOrDefault(x => x.PNR == PNR);
         }
+
+        public bool DeleteBookingByPNR(int PNR)
+        {
+            Booking booking = _context.Bookings.FirstOrDefault(x => x.PNR == PNR);
+            if(booking != null)
+            {
+                _context.Bookings.Remove(booking);
+                _context.SaveChanges();
+                return true;
+            }
+            return false;
+        }
+
+        public IEnumerable<Passenger> GetPassengers(int bookingId)
+        {
+            return _context.Passengers.Where(x => x.BookingId == bookingId);
+        }
     }
 }

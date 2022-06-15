@@ -45,7 +45,7 @@ namespace AirlineManagement.Controllers
         }
 
         [HttpGet("{id}")]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin, User")]
         public ActionResult<Airline> GetAirlineById(int id)
         {
             try

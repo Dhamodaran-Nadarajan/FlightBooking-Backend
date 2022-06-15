@@ -10,6 +10,7 @@ namespace BookingManagement.Models
     public class Booking
     {
         public int BookingId { get; set; }
+        public int ScheduleId { get; set; }
 
         [StringLength(50)]
         public string Name { get; set; }

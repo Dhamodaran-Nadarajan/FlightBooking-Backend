@@ -11,5 +11,7 @@ namespace BookingManagement.Repository
         Booking AddBooking(Booking obj);
         IEnumerable<Booking> GetBookings();
         Booking GetBookingByPNR(int PNR);
+        bool DeleteBookingByPNR(int PNR);
+        IEnumerable<Passenger> GetPassengers(int bookingId);
     }
 }

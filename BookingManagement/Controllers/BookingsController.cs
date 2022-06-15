@@ -51,7 +51,7 @@ namespace BookingManagement.Controllers
                 Booking booking = _bookingRepository.GetBookingByPNR(PNR);
                 if (booking != null)
                 {
-                    return Ok(GenerateResponseData(true, booking, ""));
+                    return Ok(booking);
                 }
                 else
                 {
@@ -82,7 +82,7 @@ namespace BookingManagement.Controllers
                 Booking booking = _bookingRepository.AddBooking(obj);
                 if (booking != null)
                 {
-                    return Ok(GenerateResponseData(true, booking, ""));
+                    return Ok(booking);
                 }
                 else
                 {
@@ -106,12 +106,54 @@ namespace BookingManagement.Controllers
         }
 
         // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete("{PNR}")]
+        public ActionResult Delete(int PNR)
         {
+            try
+            {
+                Booking booking = _bookingRepository.GetBookingByPNR(PNR);
+                if (booking != null)
+                {
+                    if(_bookingRepository.DeleteBookingByPNR(PNR))
+                    {
+                        return Ok();
+                    }
+                    else
+                    {
+                        return StatusCode(StatusCodes.Status404NotFound, "Delete Unsuccessfull..!!");
+                    }
+
+                }
+                else
+                {
+                    return StatusCode(StatusCodes.Status404NotFound, "Invalid PNR !!!");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
         }
 
-
+        [HttpGet("passengers/{id}")]
+        public ActionResult<IEnumerable<string>> GetPassengers(int id) {
+            try
+            {
+                IEnumerable<Passenger> passengers = _bookingRepository.GetPassengers(id);
+                if (passengers != null && passengers.Count() > 0)
+                {
+                    return Ok(passengers);
+                }
+                else
+                {
+                    return StatusCode(StatusCodes.Status404NotFound, "No passengers found !!!");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, GenerateResponseData(false, ex.Message, "Internal Server Error"));
+            }
+        }
 
         private object GenerateResponseData(bool isSuccess, object data, string message)
         {

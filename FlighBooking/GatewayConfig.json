@@ -100,12 +100,28 @@
       "UpstreamHttpMethod": [ "Get" ]
     },
     {
+      "DownstreamPathTemplate": "/api/bookings/passengers/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHost": "localhost",
+      "DownstreamPort": 8003,
+      "UpstreamPathTemplate": "/flightBooking/bookings/passengers/{id}",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
       "DownstreamPathTemplate": "/api/bookings",
       "DownstreamScheme": "http",
       "DownstreamHost": "localhost",
       "DownstreamPort": 8003,
       "UpstreamPathTemplate": "/flightBooking/bookings",
       "UpstreamHttpMethod": [ "Post" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/bookings/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHost": "localhost",
+      "DownstreamPort": 8003,
+      "UpstreamPathTemplate": "/flightBooking/bookings/{id}",
+      "UpstreamHttpMethod": [ "Delete" ]
     },
 
 

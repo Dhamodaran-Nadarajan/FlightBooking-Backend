@@ -10,7 +10,7 @@ namespace InventoryManagement.Repository
     {
         Inventory DeleteInventory(int inventoryId);
         Inventory ScheduleAirline(Inventory inventory);
-        IEnumerable<Inventory> GetAirlines(int airlineId);
+        Inventory GetAirlines(int airlineId);
         IEnumerable<Inventory> GetAirlines(string from, string to);
     }
 }
