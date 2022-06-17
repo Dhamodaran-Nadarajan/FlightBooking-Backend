@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BookingManagement.Repository;
+using MassTransit;
+using MassTransit.AspNetCoreIntegration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -29,6 +31,21 @@ namespace BookingManagement
                 options.UseSqlServer(_config.GetConnectionString("AirlinesManagementDB"));
             });
             services.AddScoped<IBookingRepository, BookingRepository>();
+           //services.AddMassTransit(x =>
+           //{
+           //    x.AddBus(provider => Bus.Factory.CreateUsingRabbitMq(config =>
+           //    {
+           //        config.Host(new Uri("rabbitmq://localhost"), h =>
+           //        {
+           //            h.Username("guest");
+           //            h.Password("guest");
+           //        }
+           //        );
+           //    }
+           //    ));
+           //}
+           // );
+           //services.AddMassTransitHostedServices();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 

@@ -30,7 +30,7 @@ namespace BookingManagement.Controllers
                 IEnumerable<Booking> bookings = _bookingRepository.GetBookings();
                 if (bookings != null && bookings.Count() > 0)
                 {
-                    return Ok(GenerateResponseData(true, bookings, ""));
+                    return Ok(bookings);
                 }
                 else
                 {
